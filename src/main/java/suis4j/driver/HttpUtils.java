@@ -15,6 +15,8 @@ public class HttpUtils
 	
 	public static String TEMPORARY_PATH = System.getProperty("java.io.tmpdir") + File.separator;
 	
+	public static int TIMEOUT = 60000000; //waiting time = 1000 minutes = 16 hours
+	
 	/**
 	 * Parse file from URL
 	 * @param url
@@ -228,7 +230,7 @@ public class HttpUtils
                 con.setRequestProperty("Cache-Control", "no-cache");
                 con.setDoOutput(true);
                 con.setDoInput(true);
-                con.setConnectTimeout(600000);
+                con.setConnectTimeout(TIMEOUT); 
                 PrintWriter xmlOut = new PrintWriter(con.getOutputStream());
                 xmlOut.write(param);   
                 xmlOut.flush();
@@ -243,7 +245,7 @@ public class HttpUtils
                 String line;
                 while((line = response.readLine())!=null){
                     result += "\n" + line;
-                }  
+                }
         } catch (Exception e) {
                 System.err.println(new StringBuffer().append("Cann't invoke the service '").append(input_url)
                                 .append("' successfully as the following reasons. ").append(e.getLocalizedMessage()));
@@ -261,7 +263,7 @@ public class HttpUtils
 	 */
 	public static void doGETFile(String url, String filepath)throws Exception{
 
-		long start = System.currentTimeMillis();
+//		long start = System.currentTimeMillis();
 		
 		URL u = new URL(url);
 		
@@ -320,11 +322,11 @@ public class HttpUtils
 		
 		os.close();
 		
-		long end = System.currentTimeMillis();
+//		long end = System.currentTimeMillis();
 		
-		double downloadcost = end - start;
+//		double downloadcost = end - start;
 		
-		System.out.println("data transfer time cost: " + downloadcost + " ms");
+//		System.out.println("data transfer time cost: " + downloadcost + " ms");
 		
 	}
 	
@@ -385,7 +387,7 @@ public class HttpUtils
 		
 		String resp = HttpUtils.doPost("https://geoservice.dlr.de/eoc/atmosphere/wcs", req);
 		
-		System.out.println(resp);
+//		System.out.println(resp);
 		
 		
 	}
